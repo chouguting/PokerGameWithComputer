@@ -3,8 +3,7 @@
 #include <time.h>
 
 #include "funclib.h"
-#include "oldLib.h"
-#include "testLib.h"
+
 #include "computerPlayerBehavior.h"
 
 

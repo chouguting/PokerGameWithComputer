@@ -21,24 +21,12 @@
     <ClCompile Include="main.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="oldLib.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="testLib.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="computerPlayerBehavior.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funclib.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="oldLib.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="testLib.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="computerPlayerBehavior.h">

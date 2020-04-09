@@ -141,14 +141,10 @@
     <ClCompile Include="computerPlayerBehavior.cpp" />
     <ClCompile Include="funcLib.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="oldLib.cpp" />
-    <ClCompile Include="testLib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funclib.h" />
     <ClInclude Include="computerPlayerBehavior.h" />
-    <ClInclude Include="oldLib.h" />
-    <ClInclude Include="testLib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
