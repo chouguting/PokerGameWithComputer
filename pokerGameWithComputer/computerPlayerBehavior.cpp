@@ -147,7 +147,7 @@ void sortByComPlayer(Card* handCard, int size)
 				threeOfaKindIndex = i;
 				break;
 			}
-			else if (howManyOfaKind(3, handCard + i, 3) == 1 && i == 0)
+			if (howManyOfaKind(3, handCard + i, 3) == 1 && i == 0)
 			{
 				hasThreeOfaKind = 1;
 				threeOfaKindIndex = i;
