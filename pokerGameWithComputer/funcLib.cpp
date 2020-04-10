@@ -4,7 +4,7 @@
 #include "funclib.h"
 
 
-int cardTypeScore[] = {0, 10, 30, 80, 100, 300, 500, 800, 1000};
+int cardTypeScore[] = {0, 60, 120, 200, 280, 360, 500, 800, 1000};
 
 void fillDeckFaceFirst(Card* const wDeck, const char* wFace[],
                        const char* wSuit[])
@@ -252,23 +252,23 @@ int determine(Card wDeck[], int size)
 	}
 	else if (isFlush(wDeck, size) == 1 && size > 3)
 	{
-		return 5; //同花 300分
+		return 5; //同花 360分
 	}
 	else if ((isSpecialStraight(wDeck, size) == 1 || isStraight(wDeck, size) == 1) && size > 3)
 	{
-		return 4; //順子 100分
+		return 4; //順子 280分
 	}
 	else if (howManyOfaKind(3, wDeck, size) >= 1)
 	{
-		return 3; //三條 80分
+		return 3; //三條 200分
 	}
 	else if (howManyOfaKind(2, wDeck, size) == 2)
 	{
-		return 2; //二對 30分
+		return 2; //二對 120分
 	}
 	else if (howManyOfaKind(2, wDeck, size) == 1)
 	{
-		return 1; //對子 10分
+		return 1; //對子 60分
 	}
 	else
 	{

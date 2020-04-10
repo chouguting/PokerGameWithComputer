@@ -13,19 +13,21 @@ void sortByComPlayer(Card* handCard,int size)
 	
 	int currentSize = size;
 
+	
+
 
 	//三個牌敦
 	for(currentRound=0;currentRound<3;currentRound++)
 	{
 
 
-		printf("\nround:%d\n",currentRound);
-		printf("sortIndex:%d  currentSize:%d 本輪的牌:\n", sortIndex,currentSize);
+		//printf("\nround:%d\n",currentRound);
+		//printf("sortIndex:%d  currentSize:%d 本輪的牌:\n", sortIndex,currentSize);
 		if (currentRound > 0)
 		{
 			sort(handCard, size);
 		}
-		deal(handCard, 13);
+		//deal(handCard, 13);
 		printf("\n\n");
 
 		
@@ -132,7 +134,7 @@ void sortByComPlayer(Card* handCard,int size)
 			}
 
 
-			printf("\n同花順:%d 順:%d 同花:%d\n",hasStrightFlush,hasStright,hasFlush);
+			//printf("\n同花順:%d 順:%d 同花:%d\n",hasStrightFlush,hasStright,hasFlush);
 
 
 			
@@ -212,7 +214,7 @@ void sortByComPlayer(Card* handCard,int size)
 				{
 					handCardTemp[sortIndex] = handCard[straightFlushCardIndex[i]];
 					hasFilled[sortIndex] = 1;
-					printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[straightFlushCardIndex[i]].id);
+					//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[straightFlushCardIndex[i]].id);
 					handCard[straightFlushCardIndex[i]].id = sortedIdIndex;
 					sortedIdIndex=sortedIdIndex - 1;
 					
@@ -229,7 +231,7 @@ void sortByComPlayer(Card* handCard,int size)
 				{
 					handCardTemp[sortIndex] = handCard[fourOfaKindIndex + i];
 					hasFilled[sortIndex] = 1;
-					printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[fourOfaKindIndex + i].id);
+					//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[fourOfaKindIndex + i].id);
 					handCard[fourOfaKindIndex + i].id = sortedIdIndex;
 					sortedIdIndex = sortedIdIndex - 1;
 					sortIndex = sortIndex - 1;
@@ -249,7 +251,7 @@ void sortByComPlayer(Card* handCard,int size)
 				{
 					handCardTemp[sortIndex] = handCard[threeOfaKindIndex + i];
 					hasFilled[sortIndex] = 1;
-					printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[threeOfaKindIndex + i].id);
+					//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[threeOfaKindIndex + i].id);
 					handCard[threeOfaKindIndex + i].id = sortedIdIndex;
 					sortedIdIndex = sortedIdIndex - 1;
 					sortIndex = sortIndex - 1;
@@ -259,7 +261,7 @@ void sortByComPlayer(Card* handCard,int size)
 				{
 					handCardTemp[sortIndex] = handCard[pairIndex + i];
 					hasFilled[sortIndex] = 1;
-					printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[pairIndex + i].id);
+					//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[pairIndex + i].id);
 					handCard[pairIndex + i].id = sortedIdIndex;
 					sortedIdIndex = sortedIdIndex - 1;
 					sortIndex = sortIndex - 1;
@@ -276,7 +278,7 @@ void sortByComPlayer(Card* handCard,int size)
 				{
 					handCardTemp[sortIndex] = handCard[flushCardIndex[i]];
 					hasFilled[sortIndex] = 1;
-					printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[flushCardIndex[i]].id);
+					//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[flushCardIndex[i]].id);
 					handCard[flushCardIndex[i]].id = sortedIdIndex;
 					sortedIdIndex = sortedIdIndex - 1;
 					sortIndex = sortIndex - 1;
@@ -293,7 +295,7 @@ void sortByComPlayer(Card* handCard,int size)
 				{
 					handCardTemp[sortIndex] = handCard[straightCardIndex[i]];
 					hasFilled[sortIndex] = 1;
-					printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[straightCardIndex[i]].id);
+					//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[straightCardIndex[i]].id);
 					handCard[straightCardIndex[i]].id = sortedIdIndex;
 					sortedIdIndex = sortedIdIndex - 1;
 					sortIndex = sortIndex - 1;
@@ -312,7 +314,7 @@ void sortByComPlayer(Card* handCard,int size)
 			{
 				handCardTemp[sortIndex] = handCard[threeOfaKindIndex + i];
 				hasFilled[sortIndex] = 1;
-				printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[threeOfaKindIndex + i].id);
+				//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[threeOfaKindIndex + i].id);
 				handCard[threeOfaKindIndex + i].id = sortedIdIndex;
 				sortedIdIndex = sortedIdIndex - 1;
 				sortIndex = sortIndex - 1;
@@ -330,7 +332,7 @@ void sortByComPlayer(Card* handCard,int size)
 			{
 				handCardTemp[sortIndex] = handCard[pairIndex + i];
 				hasFilled[sortIndex] = 1;
-				printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[pairIndex + i].id);
+				//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[pairIndex + i].id);
 				handCard[pairIndex + i].id = sortedIdIndex;
 				sortedIdIndex = sortedIdIndex - 1;
 				sortIndex = sortIndex - 1;
@@ -339,7 +341,7 @@ void sortByComPlayer(Card* handCard,int size)
 			{
 				handCardTemp[sortIndex] = handCard[secondPairIndex + i];
 				hasFilled[sortIndex] = 1;
-				printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[secondPairIndex + i].id);
+				//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[secondPairIndex + i].id);
 				handCard[secondPairIndex + i].id = sortedIdIndex;
 				sortedIdIndex = sortedIdIndex - 1;
 				sortIndex = sortIndex - 1;
@@ -361,7 +363,7 @@ void sortByComPlayer(Card* handCard,int size)
 			{
 				handCardTemp[sortIndex] = handCard[pairIndex + i];
 				hasFilled[sortIndex] = 1;
-				printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[pairIndex + i].id);
+				//printf("存入SORTINDEX: %d  牌的ID:%d\n", sortIndex, handCard[pairIndex + i].id);
 				handCard[pairIndex + i].id = sortedIdIndex;
 				sortedIdIndex = sortedIdIndex - 1;
 				sortIndex = sortIndex - 1;
@@ -375,7 +377,7 @@ void sortByComPlayer(Card* handCard,int size)
 		//順位9: 散牌
 		handCardTemp[sortIndex] = handCard[currentSize-1];
 		hasFilled[sortIndex] = 1;
-		printf("存入SORTINDEX: %d  牌的ID:%d\n",sortIndex, handCard[currentSize - 1].id);
+		//printf("存入SORTINDEX: %d  牌的ID:%d\n",sortIndex, handCard[currentSize - 1].id);
 		handCard[currentSize - 1].id = sortedIdIndex;
 		
 		sortedIdIndex = sortedIdIndex - 1;
@@ -405,11 +407,11 @@ void sortByComPlayer(Card* handCard,int size)
 
 	
 
-	printf("TEMP:\n");
-	deal(handCardTemp, 13);
+	//printf("TEMP:\n");
+	//deal(handCardTemp, 13);
 
-	printf("\HAND ORG:\n");
-	deal(handCard, 13);
+	//printf("\HAND ORG:\n");
+	//deal(handCard, 13);
 	
 	for (i = 0; i < 13; i++)
 	{

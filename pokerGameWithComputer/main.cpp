@@ -108,6 +108,22 @@ int main()
 
 				if(currentPlayer==0)
 				{
+                    //後墩五張
+                    printf("請輸入後墩五張:");
+                    for (i = 8; i < 13; i++)
+                    {
+                        scanf_s("%d", &indexTemp, 10);
+                        handCardTemp[i] = handCard[currentPlayer][indexTemp - 1];
+                    }
+
+                    //中墩五張
+                    printf("請輸入中墩五張:");
+                    for (i = 3; i < 8; i++)
+                    {
+                        scanf_s("%d", &indexTemp, 10);
+                        handCardTemp[i] = handCard[currentPlayer][indexTemp - 1];
+                    }
+					
                     //前墩三張
                     printf("請輸入前墩三張:");
                     for (i = 0; i < 3; i++)
@@ -116,20 +132,8 @@ int main()
                         handCardTemp[i] = handCard[currentPlayer][indexTemp - 1];
                     }
 
-                    //中墩五張
-                    printf("請輸入中墩五張:");
-                    for (; i < 8; i++)
-                    {
-                        scanf_s("%d", &indexTemp, 10);
-                        handCardTemp[i] = handCard[currentPlayer][indexTemp - 1];
-                    }
-                    //後墩五張
-                    printf("請輸入後墩五張:");
-                    for (; i < 13; i++)
-                    {
-                        scanf_s("%d", &indexTemp, 10);
-                        handCardTemp[i] = handCard[currentPlayer][indexTemp - 1];
-                    }
+                    
+                    
 
                     for (i = 0; i < 13; i++)
                     {
