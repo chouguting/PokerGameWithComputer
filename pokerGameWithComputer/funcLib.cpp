@@ -4,8 +4,10 @@
 #include "funclib.h"
 
 
+//儲存各種牌型的分數
 int cardTypeScore[] = {0, 60, 120, 200, 280, 360, 500, 800, 1000};
 
+//以牌面數字為優先的填牌方式(梅花2,菱形2,紅心2,黑桃2,梅花3......)
 void fillDeckFaceFirst(Card* const wDeck, const char* wFace[],
                        const char* wSuit[])
 {
@@ -16,26 +18,16 @@ void fillDeckFaceFirst(Card* const wDeck, const char* wFace[],
 		int k;
 		for (k = 0; k < 4; k++)
 		{
-			wDeck[i].face = wFace[j];
-			wDeck[i].suit = wSuit[k];
-			wDeck[i].id = i;
+			wDeck[i].face = wFace[j]; //寫入牌面數字
+			wDeck[i].suit = wSuit[k]; //寫入牌面花色
+			wDeck[i].id = i; //給每一張牌id,越大的牌id越大(0至52)
 			i++;
 		}
 	}
 }
 
-void fillDeck(Card* const wDeck, const char* wFace[],
-              const char* wSuit[])
-{
-	int i;
 
-	for (i = 0; i <= 51; i++)
-	{
-		wDeck[i].face = wFace[i % 13];
-		wDeck[i].suit = wSuit[i / 13];
-	}
-}
-
+//隨機洗牌(洗52張wDeck的牌)
 void shuffle(Card* const wDeck)
 {
 	int i, j;
@@ -50,16 +42,19 @@ void shuffle(Card* const wDeck)
 	}
 }
 
+
+//發牌(發wDeck的牌，共發quantity張)
 void deal(const Card* const wDeck, int quantity)
 {
 	int i;
 
 	for (i = 0; i < quantity; i++)
+		//印出第幾張,甚麼牌,和他的id
 		printf("\t第%d張牌 \t %5s of %-8s \t%d%c", i + 1, wDeck[i].face,
 		       wDeck[i].suit, wDeck[i].id, '\n');
 }
 
-
+//依次印出所有的牌，並且分成playerCount,每份13張
 void dealManyPlayer(int playerCount, const Card* const wDeck)
 {
 	int i;
@@ -80,14 +75,15 @@ void dealManyPlayer(int playerCount, const Card* const wDeck)
 }
 
 
-//判斷同花
+//判斷同花(回傳1是，0不是)
 int isFlush(Card wDeck[], int size)
 {
-	int isflush = 1;
+	int isflush = 1; //先假設他是同花
 	int i;
-	int lastSuit = (wDeck[0].id + 1) % 4;
+	int lastSuit = (wDeck[0].id + 1) % 4; //上一張牌的花色
 	for (i = 0; i < size; i++)
 	{
+		//如果檢查到一張花色不一樣的,就沒有同花了
 		if ((wDeck[i].id + 1) % 4 != lastSuit)
 		{
 			isflush = 0;
@@ -98,47 +94,51 @@ int isFlush(Card wDeck[], int size)
 	return isflush;
 }
 
-//判斷順
+//判斷順(回傳1是，0不是)
 int isStraight(Card wDeck[], int size)
 {
-	int isstraight = 1;
+	int isstraight = 1; //先假設他是順子
 	int i;
 
-	int lastFace = (wDeck[0].id) / 4;
+	int lastFace = (wDeck[0].id) / 4; //上一張牌的牌面數字
 	for (i = 1; i < size; i++)
 	{
-		//printf("FACE: %d LAST:%d\n", (wDeck[i].id) / 4,lastFace);
+		//如果檢查到一張牌跟上一張不連續就不是順了
 		if ((wDeck[i].id) / 4 != lastFace + 1)
 		{
 			isstraight = 0;
 		}
-		lastFace = (wDeck[i].id) / 4;
+		lastFace = (wDeck[i].id) / 4; //每檢查完一張這張牌就會變成下張的上一張牌
 	}
 	return isstraight;
 }
 
 
-//判斷A2345的順 (特殊的)
+//判斷特殊的(A2345)的順 (回傳1是，0不是)
 int isSpecialStraight(Card wDeck[], int size)
 {
-	int isspecialstraightraight = 1;
+	int isspecialstraightraight = 1; //先預設他是特殊順
 	int i;
 
-	if (wDeck[0].id / 4 != 0)
+	if (wDeck[0].id / 4 != 0) //如果最id小的那張的數字不是2,就不成立
 	{
 		isspecialstraightraight = 0;
 	}
 
+	//和上面順一樣的檢查方式(這次檢查到倒數第二張)
 	int lastFace = (wDeck[0].id) / 4;
 	for (i = 1; i < size - 1; i++)
 	{
-		//printf("FACE: %d LAST:%d\n", (wDeck[i].id) / 4,lastFace);
+		//如果檢查到一張牌跟上一張不連續就不是順了
 		if ((wDeck[i].id) / 4 != lastFace + 1)
 		{
 			isspecialstraightraight = 0;
 		}
-		lastFace = (wDeck[i].id) / 4;
+		lastFace = (wDeck[i].id) / 4; //每檢查完一張這張牌就會變成下張的上一張牌
 	}
+
+
+	//id最大的那張牌數字應該要是A
 	if (wDeck[size - 1].id / 4 != 12)
 	{
 		isspecialstraightraight = 0;
@@ -147,16 +147,19 @@ int isSpecialStraight(Card wDeck[], int size)
 }
 
 
-//判斷給定值數量的牌出現幾次
+/*判斷給定值數量的牌出現幾次
+  要判斷對子的話第一個參數就輸入2,三條就3,四條就4
+  (回傳值是出現了幾次)
+*/
 int howManyOfaKind(int multipleKind, Card wDeck[], int size)
 {
-	int howMany = 0;
+	int howMany = 0; //出現了幾次
 	int i = 0;
+	//從第i個開始往後找，看是不是同數字的剛好有multipleKind張
 	while (i <= size - multipleKind)
 	{
-		int hasCorrectNumber = 1;
-		int currentFace = (wDeck[i].id) / 4;
-		int sameCount = 0;
+		int currentFace = (wDeck[i].id) / 4; //儲存這輪檢查牌的數字
+		int sameCount = 0; //往後找看有幾張牌一樣
 		int j = 0;
 
 		while (currentFace == (wDeck[i + j].id) / 4 && j + i < size)
@@ -164,26 +167,29 @@ int howManyOfaKind(int multipleKind, Card wDeck[], int size)
 			sameCount++;
 			j++;
 		}
+		//如果一樣數字的牌的數量剛好和multipleKind,才算有找到我們要的
 		if (sameCount == multipleKind)
 		{
-			i = i + multipleKind;
+			i = i + multipleKind; //檢查過的牌不用再檢查
 			howMany++;
 		}
 		else
 		{
-			i = i + sameCount;
+			i = i + sameCount; //檢查過的牌不用再檢查
 		}
 	}
 	return howMany;
 }
 
-
-//判斷給定值數量的牌出現幾次
+/*判斷給定值數量的牌出現在哪
+  要判斷對子的話第一個參數就輸入2,三條就3,四條就4
+  (回傳值是出現在哪裡)
+*/
 int whereIsHowManyOfaKind(int multipleKind, Card wDeck[], int size)
 {
 	int i = size - 1;
 	int theIndex;
-	
+	//基本上和howManyOfaKind找法一樣，但這次是從後面找回來
 	while (i >= multipleKind - 1)
 	{
 		int currentFace = (wDeck[i].id) / 4;
@@ -197,20 +203,17 @@ int whereIsHowManyOfaKind(int multipleKind, Card wDeck[], int size)
 		}
 		if (sameCount == multipleKind)
 		{
-			theIndex=i - multipleKind+1;
-			return theIndex;
+			theIndex = i - multipleKind + 1;
+			return theIndex; //如果出現就直接回傳位置
 		}
-		else
-		{
-			i = i - sameCount;
-		}
+		i = i - sameCount;
 	}
-	
+
 	return -1;
 }
 
 
-//排序
+//找到最小的就往前排
 void sort(Card wDeck[], int size)
 {
 	int i;
@@ -235,6 +238,9 @@ void sort(Card wDeck[], int size)
 	}
 }
 
+//要先SORT!!
+//判斷wDeck中大小為size中的排是甚麼牌型
+//回傳牌型的index
 int determine(Card wDeck[], int size)
 {
 	sort(wDeck, size);
@@ -242,44 +248,45 @@ int determine(Card wDeck[], int size)
 	{
 		return 8; //同花順 1000分
 	}
-	else if (howManyOfaKind(4, wDeck, size) >= 1)
+	if (howManyOfaKind(4, wDeck, size) >= 1)
 	{
 		return 7; //四條 800分
 	}
-	else if (howManyOfaKind(3, wDeck, size) >= 1 && howManyOfaKind(2, wDeck, size) >= 1)
+	if (howManyOfaKind(3, wDeck, size) >= 1 && howManyOfaKind(2, wDeck, size) >= 1)
 	{
 		return 6; //葫蘆 500分
 	}
-	else if (isFlush(wDeck, size) == 1 && size > 3)
+	if (isFlush(wDeck, size) == 1 && size > 3)
 	{
 		return 5; //同花 360分
 	}
-	else if ((isSpecialStraight(wDeck, size) == 1 || isStraight(wDeck, size) == 1) && size > 3)
+	if ((isSpecialStraight(wDeck, size) == 1 || isStraight(wDeck, size) == 1) && size > 3)
 	{
 		return 4; //順子 280分
 	}
-	else if (howManyOfaKind(3, wDeck, size) >= 1)
+	if (howManyOfaKind(3, wDeck, size) >= 1)
 	{
 		return 3; //三條 200分
 	}
-	else if (howManyOfaKind(2, wDeck, size) == 2)
+	if (howManyOfaKind(2, wDeck, size) == 2)
 	{
 		return 2; //二對 120分
 	}
-	else if (howManyOfaKind(2, wDeck, size) == 1)
+	if (howManyOfaKind(2, wDeck, size) == 1)
 	{
 		return 1; //對子 60分
 	}
-	else
-	{
-		return 0; //散牌 0分
-	}
+	return 0; //散牌 0分
 }
 
-
+//要先SORT!!
+/*找到一組牌中,可比較的最大牌是哪一張
+  例如葫蘆中有一個三條加上一個對子，但要比較的是其中三條中的最大那張，而不是五張中最大的那張
+  回傳是最重要那張的id*/
 Card mostImportantCard(int multipleKind, Card wDeck[], int size)
 {
-	int i = size - 1;
+	//基本上和howManyOfaKind找法一樣，但這次是從後面找回來
+	int i = size - 1; //從Size-1開始找
 	Card veryImoprtantCard = wDeck[i];
 	while (i >= multipleKind - 1)
 	{
@@ -296,49 +303,43 @@ Card mostImportantCard(int multipleKind, Card wDeck[], int size)
 		{
 			veryImoprtantCard = wDeck[i];
 			i = i - multipleKind;
-
-			return veryImoprtantCard;
+			return veryImoprtantCard; //只要一找到就直接return了
 		}
-		else
-		{
-			i = i - sameCount;
-		}
+		i = i - sameCount;
 	}
 	return veryImoprtantCard;
 }
 
+
+//要先SORT!!
+//給分，回傳是這副牌的分數(牌面分加牌型分)
 int giveScore(Card wDeck[], int size)
 {
-	int type = determine(wDeck, size);
+	int type = determine(wDeck, size); //判斷牌型
 	int score = 0;
-	if (isSpecialStraight(wDeck, size) == 1)
-	{
-		score = score + (wDeck[size - 2].id);
-	}
-	else if (type == 7)
+
+	//牌面分數
+	if (type == 7) //四條: 利用mostImportantCard找出四條中最大的那一張
 	{
 		score = score + mostImportantCard(4, wDeck, size).id;
 	}
-	else if (type == 6)
+	else if (type == 6) //葫蘆: 利用mostImportantCard找出葫蘆裡三條中最大的那一張
 	{
 		score = score + mostImportantCard(3, wDeck, size).id;
 	}
-	else if (type == 3)
+	else if (type == 3) //三條: 利用mostImportantCard找出三條中最大的那一張
 	{
 		score = score + mostImportantCard(3, wDeck, size).id;
 	}
-	else if (type == 2)
+	else if (type == 2 || type == 1) //兩對或對子:找到最大對子的最大那張
 	{
 		score = score + mostImportantCard(2, wDeck, size).id;
 	}
-	else if (type == 1)
-	{
-		score = score + mostImportantCard(2, wDeck, size).id;
-	}
-	else
+	else //其他牌型: 比較最大的那一張
 	{
 		score = score + (wDeck[size - 1].id);
 	}
-	score = score + cardTypeScore[type];
+
+	score = score + cardTypeScore[type]; //再加上牌型分數
 	return score;
 }
