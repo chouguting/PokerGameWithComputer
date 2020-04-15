@@ -86,7 +86,34 @@ int main()
 
 			int currentPlayer; //現在的動作是針對哪位玩家
 
+			system("cls");
 
+			
+			//玩家換牌
+			int changeWithWhom;
+			printf("玩家想跟誰換牌? (輸入1~3號):");
+			scanf_s("%d", &changeWithWhom,10);
+			sort(handCard[changeWithWhom], 13); //先整理
+			sortByComPlayer(handCard[changeWithWhom], 13); //先依照牌型排列牌
+			printf("你的牌:\n");
+			sort(handCard[0], 13);
+			deal(handCard[0], 13);
+			printf("跟第%d位電腦換牌 請選擇3張牌:",changeWithWhom);
+			
+			for(i=0;i<3;i++)
+			{
+				int changeCardIndexBuffer;
+				scanf_s("%d",&changeCardIndexBuffer); //輸入要換的牌是哪幾張
+				changeCardIndexBuffer--; //牌的編號是從1開始,但振烈index是從0開始
+
+				//swap換牌
+				Card temp = handCard[0][changeCardIndexBuffer];
+				handCard[0][changeCardIndexBuffer] = handCard[changeWithWhom][i];
+				handCard[changeWithWhom][i] = temp;
+			}
+
+
+			
 			//排列牌組，順便計算手牌分數
 			for (currentPlayer = 0; currentPlayer < playerCount; currentPlayer++)
 			{

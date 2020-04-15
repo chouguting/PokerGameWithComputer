@@ -29,7 +29,7 @@ void sortByComPlayer(Card* handCard, int size)
 			sort(handCard, size); //先整理牌(第一ROUND不用)
 		}
 
-		printf("\n\n");
+		//printf("\n\n");
 
 
 		int hasStrightFlush = 0; //有沒有同花順
@@ -164,7 +164,7 @@ void sortByComPlayer(Card* handCard, int size)
 				break;
 			}
 		}
-		if (hasThreeOfaKind == 1)printf("ThreeOfaKind Index:%d\n", threeOfaKindIndex);
+		//if (hasThreeOfaKind == 1)printf("ThreeOfaKind Index:%d\n", threeOfaKindIndex);
 
 
 		//抓兩個對子(第一個取小的第二個取大的)
@@ -192,8 +192,8 @@ void sortByComPlayer(Card* handCard, int size)
 		}
 		if (pairIndex == secondPairIndex)hasSecondPair = 0;
 
-		if (hasPair == 1)printf("pair Index:%d\n", pairIndex);
-		if (hasSecondPair == 1)printf("SECOND pair Index:%d\n", secondPairIndex);
+		//if (hasPair == 1)printf("pair Index:%d\n", pairIndex);
+		//if (hasSecondPair == 1)printf("SECOND pair Index:%d\n", secondPairIndex);
 
 
 		//已經找完了 開始填入CardTemp
